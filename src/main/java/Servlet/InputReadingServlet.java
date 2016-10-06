@@ -1,0 +1,19 @@
+package Servlet;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * Created by nathanielellsworth on 10/5/16.
+ */
+public class InputReadingServlet extends HttpServlet{
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/result.jsp");
+        dispatcher.forward(req,resp);
+    }
+}
