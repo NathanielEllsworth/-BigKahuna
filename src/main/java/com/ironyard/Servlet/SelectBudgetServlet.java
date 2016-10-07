@@ -1,6 +1,6 @@
-package Servlet;
+package com.ironyard.Servlet;
 
-import Data.Budget;
+import com.ironyard.Data.Budget;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

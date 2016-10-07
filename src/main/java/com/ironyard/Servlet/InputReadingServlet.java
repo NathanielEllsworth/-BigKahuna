@@ -1,4 +1,4 @@
-package Servlet;
+package com.ironyard.Servlet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

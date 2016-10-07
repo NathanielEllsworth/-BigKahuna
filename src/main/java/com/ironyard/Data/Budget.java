@@ -1,7 +1,23 @@
-package Data;
+package com.ironyard.Data;
 
 /**
  * Created by nathanielellsworth on 10/5/16.
+ *
+ * A quick rundown of how I built this project from bottom up.
+ * 1.Started with the 'mockup.jsp' to layout how the project will be
+ * 2.Built 'Budget' class for data strings
+ * 3.Built 'createBudget.jsp' infrastructure to model the 'mockup.jsp'
+ * 4.Built a 'budgetList.jsp' to store the budgets, (deleted it for posgres database storage)
+ * 5.Built 'result.jsp' for user result, (deleted for posgres services package)
+ * 6.Built Http 'BudgetServlet', (deleted for posgres)
+ * 7.Built Http 'CreateBudgetServlet', (deleted for posgres)
+ * 8.Built Http 'InputReadingServlet', (deleted for posgres services package)
+ * 9.Built Http 'SelectBudgetServlet', (deleted for posgres services package)
+ * 10.Built 'BudgetTotals' class for data strings in totaling 'budget' and 'actual' amounts
+ * 11.Built 'DatabaseConnection' to establish a connection with posgres
+ * 12.Built 'DatabaseLineService' to sync posgres with the 'Data' package and to establish the interactions between the two
+ *
+ *
  */
 public class Budget {
     private long id;
@@ -18,8 +34,7 @@ public class Budget {
         this.actualAmount = actualAmount;
     }
 
-    public Budget(long id, String description, String category, String budgetAmount, String actualAmount) {
-    }
+    public Budget() {}
 
     public long getId() {
         return id;

@@ -3,5 +3,45 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+<display-name>Archetype Created Web Application</display-name>
+
+<servlet>
+  <servlet-name>BudgetServlet</servlet-name>
+  <servlet-class>com.ironyard.Servlet.BudgetServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>BudgetServlet</servlet-name>
+  <url-pattern>/movies</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>ResultServlet</servlet-name>
+  <servlet-class>com.ironyard.Servlet.InputReadingServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>ResultServlet</servlet-name>
+  <url-pattern>/inputreader</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>CreateMovieServlet</servlet-name>
+  <servlet-class>com.ironyard.Servlet.CreateBudgetServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>CreateMovieServlet</servlet-name>
+  <url-pattern>/createmovie</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>SelectBudgetServlet</servlet-name>
+  <servlet-class>com.ironyard.Servlet.SelectBudgetServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>SelectBudgetServlet</servlet-name>
+  <url-pattern>/selectbudget</url-pattern>
+</servlet-mapping>
 </web-app>
