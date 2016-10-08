@@ -3,45 +3,68 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-<display-name>Archetype Created Web Application</display-name>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>BudgetServlet</servlet-name>
+    <servlet-class>com.ironyard.Servlet.BudgetListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BudgetServlet</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
 
-<servlet>
-  <servlet-name>BudgetServlet</servlet-name>
-  <servlet-class>com.ironyard.Servlet.BudgetServlet</servlet-class>
-</servlet>
+  <servlet>
+    <servlet-name>Stats</servlet-name>
+    <servlet-class>com.ironyard.Servlet.BudgetStatsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Stats</servlet-name>
+    <url-pattern>/stats</url-pattern>
+  </servlet-mapping>
 
-<servlet-mapping>
-  <servlet-name>BudgetServlet</servlet-name>
-  <url-pattern>/movies</url-pattern>
-</servlet-mapping>
 
-<servlet>
-  <servlet-name>ResultServlet</servlet-name>
-  <servlet-class>com.ironyard.Servlet.InputReadingServlet</servlet-class>
-</servlet>
+  <servlet>
+    <servlet-name>CreateBudget</servlet-name>
+    <servlet-class>com.ironyard.Servlet.BudgetCreateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateBudget</servlet-name>
+    <url-pattern>/create</url-pattern>
+  </servlet-mapping>
 
-<servlet-mapping>
-  <servlet-name>ResultServlet</servlet-name>
-  <url-pattern>/inputreader</url-pattern>
-</servlet-mapping>
+  <servlet>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>com.ironyard.Servlet.BudgetSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
 
-<servlet>
-  <servlet-name>CreateMovieServlet</servlet-name>
-  <servlet-class>com.ironyard.Servlet.CreateBudgetServlet</servlet-class>
-</servlet>
+  <servlet>
+    <servlet-name>SelectServlet</servlet-name>
+    <servlet-class>com.ironyard.Servlet.BudgetSelectServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectServlet</servlet-name>
+    <url-pattern>/select</url-pattern>
+  </servlet-mapping>
 
-<servlet-mapping>
-  <servlet-name>CreateMovieServlet</servlet-name>
-  <url-pattern>/createmovie</url-pattern>
-</servlet-mapping>
 
-<servlet>
-  <servlet-name>SelectBudgetServlet</servlet-name>
-  <servlet-class>com.ironyard.Servlet.SelectBudgetServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-  <servlet-name>SelectBudgetServlet</servlet-name>
-  <url-pattern>/selectbudget</url-pattern>
-</servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateServlet</servlet-name>
+    <servlet-class>com.ironyard.Servlet.BudgetUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateServlet</servlet-name>
+    <url-pattern>/update</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteServlet</servlet-name>
+    <servlet-class>com.ironyard.Servlet.BudgetDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteServlet</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
 </web-app>

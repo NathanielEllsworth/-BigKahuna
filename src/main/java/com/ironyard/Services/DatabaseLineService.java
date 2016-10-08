@@ -12,9 +12,18 @@ import java.util.List;
 
 /**
  * Created by nathanielellsworth on 10/6/16.
+ *
+ * CREATE TABLE budget
+ (
+ bud_key_id INTEGER PRIMARY KEY NOT NULL,
+ bud_description VARCHAR(255),
+ bud_category VARCHAR(255),
+ bud_budgeted_amount INTEGER,
+ bud_actual_amount INTEGER
+ );
  */
 
-//pulling all data from posgres budget table
+//pulling all data from posgres budget table (good)
 public class DatabaseLineService {
 
     public List<Budget> getAllBudgets() throws SQLException {
@@ -37,7 +46,7 @@ public class DatabaseLineService {
         }
         return allBudgets;
     }
-        //Linking the 'BudgetTotals' Class to posgres and using SQL syntax to add up the 'budget' and 'actual' amounts
+        //Linking the 'BudgetTotals' Class to posgres and using SQL syntax to add up the 'budget' and 'actual' amounts (good)
 
     public List<BudgetTotals> getBudgetTotals() throws SQLException{
         BudgetTotals found = null;
@@ -56,7 +65,7 @@ public class DatabaseLineService {
         return allBT;
     }
 
-    //this is the search function where the user can search by category or description
+    //this is the search function where the user can search by category or description (good)
 
     public List<Budget> search (String search) throws SQLException{
         List<Budget> found = new ArrayList<Budget>();
@@ -79,7 +88,7 @@ public class DatabaseLineService {
         return found;
     }
 
-    //Setting the list results
+    //Setting the list results (good)
     private List<Budget> listResults(ResultSet rs) throws SQLException{
         List<Budget> found = new ArrayList<Budget>();
         while (rs.next()){
@@ -91,6 +100,94 @@ public class DatabaseLineService {
             x.setId(rs.getInt("bud_key_id"));
         }
         return found;
+    }
+
+    //Save Budget to Database
+    public void save(Budget myBudget) throws SQLException{
+        DatabaseConnection dbaInfo = new DatabaseConnection();
+        Connection conn = null;
+        try {
+            conn = dbaInfo.getConnection();
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO finance.budget" +
+                    "(bud_key_id, bud_description, bud_category, bud_budgeted_amount, bud_actual_amount) VALUES (nextval('finance.BUDGETS_SEQ;'),?,?,?,?)");
+            ps.setString(1, myBudget.getDescription());
+            ps.setString(2, myBudget.getCategory());
+            ps.setDouble(3, myBudget.getBudgetAmount());
+            ps.setDouble(4, myBudget.getActualAmount());
+            ps.executeUpdate();
+        }catch(SQLException e) {
+            e.printStackTrace();
+            conn.rollback();
+            throw e;
+        }finally {
+            conn.close();
+        }
+    }
+
+    public Budget getBudgetById(long idCon) throws SQLException {
+        DatabaseConnection dbaInfo = new DatabaseConnection();
+        Connection conn = null;
+        Budget foundById = null;
+        try{
+            conn = dbaInfo.getConnection();
+            //starts with search
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM finance.budget WHERE bud_key_id = ?;");
+            ps.setLong(1, idCon);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                foundById = new Budget();
+                foundById.setDescription(rs.getString("bud_description"));
+                foundById.setCategory(rs.getString("bud_category"));
+                foundById.setBudgetAmount(rs.getDouble("bud_budgeted_amount"));
+                foundById.setActualAmount(rs.getDouble("bud_actual_amount"));
+                foundById.setId(rs.getLong("bud_key_id"));
+            }
+        }catch(SQLException x){
+            x.printStackTrace();
+            conn.rollback();
+            throw x;
+        }finally {
+            conn.close();
+        }
+        return foundById;
+    }
+
+    public void update (Budget aBudget) throws SQLException{
+        DatabaseConnection dbaInfo = new DatabaseConnection();
+        Connection conn = null;
+        try{
+            conn = dbaInfo.getConnection();
+            PreparedStatement ps = conn.prepareStatement("UPDATE finance.budget SET bud_description=?, bud_category=?, bud_budgeted_amount=?, bud_actual_amount=? WHERE bud_key_id=?;");
+            ps.setString(1, aBudget.getDescription());
+            ps.setString(2, aBudget.getCategory());
+            ps.setDouble(3, aBudget.getBudgetAmount());
+            ps.setDouble(4, aBudget.getActualAmount());
+            ps.setLong(5, aBudget.getId());
+            ps.executeUpdate();
+        }catch(SQLException x){
+            x.printStackTrace();
+            conn.rollback();
+            throw x;
+        }finally{
+            conn.close();
+        }
+    }
+
+    public void delete (long id) throws SQLException{
+        DatabaseConnection dbaInfo = new DatabaseConnection();
+        Connection conn = null;
+        try{
+            conn = dbaInfo.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM finance.budget WHERE bud_key_id");
+            ps.setLong(1, id);
+            ps.executeUpdate();
+        }catch(SQLException x){
+            x.printStackTrace();
+            conn.rollback();
+            throw x;
+        }finally{
+            conn.close();
+        }
     }
 }
 

@@ -6,7 +6,7 @@ package com.ironyard.Data;
  * A quick rundown of how I built this project from bottom up.
  * 1.Started with the 'mockup.jsp' to layout how the project will be
  * 2.Built 'Budget' class for data strings
- * 3.Built 'createBudget.jsp' infrastructure to model the 'mockup.jsp'
+ * 3.Built 'edit.jsp' infrastructure to model the 'mockup.jsp'
  * 4.Built a 'budgetList.jsp' to store the budgets, (deleted it for posgres database storage)
  * 5.Built 'result.jsp' for user result, (deleted for posgres services package)
  * 6.Built Http 'BudgetServlet', (deleted for posgres)
