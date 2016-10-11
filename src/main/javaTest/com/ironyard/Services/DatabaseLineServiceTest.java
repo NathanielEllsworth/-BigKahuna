@@ -1,8 +1,11 @@
 package com.ironyard.Services;
 
+import com.ironyard.Data.Budget;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.Connection;
 
 import static org.junit.Assert.*;
 
@@ -37,6 +40,24 @@ public class DatabaseLineServiceTest {
 
     @Test
     public void save() throws Exception {
+        DatabaseLineService dbService = new DatabaseLineService();
+
+        //declare
+        Budget b = null;
+        // assign
+        b = new Budget();
+
+        // set values
+        b.setActualAmount(123);
+        b.setBudgetAmount(456);
+        b.setCategory("Hello");
+        b.setDescription("Goodbye");
+
+        dbService.save(b);
+
+        Budget fetched = dbService.getBudgetById(b.getId());
+        assertNotNull(fetched);
+        assertEquals(b.getCategory(), fetched.getCategory());
 
     }
 

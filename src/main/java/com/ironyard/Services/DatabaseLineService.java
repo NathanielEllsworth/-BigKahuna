@@ -3,10 +3,7 @@ package com.ironyard.Services;
 import com.ironyard.Data.Budget;
 import com.ironyard.Data.BudgetTotals;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,8 +105,9 @@ public class DatabaseLineService {
         Connection conn = null;
         try {
             conn = dbaInfo.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO finance.budget" +
-                    "(bud_key_id, bud_description, bud_category, bud_budgeted_amount, bud_actual_amount) VALUES (nextval('finance.BUDGETS_SEQ;'),?,?,?,?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO finance.budget " +
+                    "(bud_key_id, bud_description, bud_category, bud_budgeted_amount, bud_actual_amount) VALUES (nextval('finance.BUDGETS_SEQ'),?,?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, myBudget.getDescription());
             ps.setString(2, myBudget.getCategory());
             ps.setDouble(3, myBudget.getBudgetAmount());
@@ -178,7 +176,7 @@ public class DatabaseLineService {
         Connection conn = null;
         try{
             conn = dbaInfo.getConnection();
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM finance.budget WHERE bud_key_id");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM finance.budget WHERE bud_key_id = ?");
             ps.setLong(1, id);
             ps.executeUpdate();
         }catch(SQLException x){
